@@ -152,6 +152,21 @@ app.get('/viderlaliste', (req, res) => {
 })
 
 
+////////////////////////////////////////////////////////////AFFICHER/RECHERCHER UN PROFIL
+app.post('/recherche', (req, res) => {
+
+    let rechercher = req.body.recherche;
+
+    db.collection('adresse').find({$or: [{"prenom": rechercher}, {"nom" : rechercher}, {"telephone" : rechercher}, {"courriel" : rechercher}]}).toArray(function(err, resultat){
+
+
+        if (err) return console.log(err)
+        res.render('profil.ejs', {adresses: resultat})
+
+
+    })
+})
+
 
 /////////////////////////////////////////////////////////FUB
 let db // variable qui contiendra le lien sur la BD
