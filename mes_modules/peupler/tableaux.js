@@ -92,17 +92,17 @@ let telephone = [
 
 let courriel = [
 
-            'hotmail.com',
-                  'vedeotron.com',
-                  'gmail.com',
-                  'yahoo.com',
-                  'cmaisonneuve.qc.ca',
-                  'webfaction.com',
-                  'cvsyc.com',
-                  'bell.ca',
-                  'umontreal.ca',
-                  'skillscanada.ca',
-                  'inforoutefpt.com'
+            '@hotmail.com',
+            '@videotron.com',
+            '@gmail.com',
+            '@yahoo.com',
+            '@cmaisonneuve.qc.ca',
+            '@webfaction.com',
+            '@cvsyc.com',
+            '@bell.ca',
+            '@umontreal.ca',
+            '@skillscanada.ca',
+            '@inforoutefpt.com'
 
          ];
 

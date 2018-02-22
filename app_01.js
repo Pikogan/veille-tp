@@ -18,7 +18,7 @@ app.get('/membres', (req, res) => {
     let cursor = db.collection('adresse').find().toArray(function(err, resultat){
 
          if (err) return console.log(err)
-         //console.log('util = ' + util.inspect(resultat));
+         console.log('util = ' + util.inspect(resultat));
 
          //transfert du contenu vers la vue index.ejs (renders)
          //affiche le contenu de la BD
@@ -29,6 +29,7 @@ app.get('/membres', (req, res) => {
 
 app.get('/', (req, res) => {
 
+     console.log('accueil')
      res.render('accueil.ejs')
 
 })
@@ -37,10 +38,13 @@ app.get('/', (req, res) => {
 //////////////////////////////////////////////////////AJOUTER
 app.get('/ajouter', function (req, res) {
 
+    //Preparer l'output en format JSON
+    console.log('la route /traiter_get')
+
     db.collection('adresse').save(req.query, (err, result) => {
              
         if (err) return console.log(err)
-        //console.log('sauvegarder dans la BD')
+        console.log('sauvegarder dans la BD')
         res.redirect('/membres')
     })
 })
@@ -74,23 +78,25 @@ app.get('/trier/:cle/:ordre', (req, res) => {
             ordre = 'asc';
         }
 
-        res.render('membres.ejs', {adresses: resultat, test:ordre})
 
- 
+        res.render('membres.ejs', {adresses: resultat, test:ordre})
     })
+
 
  })
 
 ////////////////////////////////////////////////////////////MODIFIER
 app.post('/modifier', (req, res) => {
 
-    //console.log(req)
+    console.log(req.body['_id'])
+    
+        console.log('sauvegarde') 
 
-        var oModif = {
+        let oModif = {
 
             "_id": ObjectID(req.body['_id']), 
+            prenom: req.body.prenom,
             nom: req.body.nom,
-            prenom:req.body.prenom, 
             telephone:req.body.telephone,
             courriel:req.body.courriel
 
@@ -98,10 +104,12 @@ app.post('/modifier', (req, res) => {
 
 
         let util = require("util");
+        console.log('util = ' + util.inspect(oModif));
     
     db.collection('adresse').save(oModif, (err, result) => {
 
         if (err) return console.log(err)
+        console.log('sauvegarder dans la BD')
         res.redirect('/membres')
 
     })
@@ -112,11 +120,16 @@ app.post('/modifier', (req, res) => {
 app.get('/peupler', function (req, res) {
 
     let peuplement = peupler()
+    console.log(peuplement)
+
+    //Preparer l'output en format JSON
+    console.log('la route /traiter_get')
 
     for(let i=0; i<peuplement.length; i++){
 
          db.collection('adresse').save(peuplement[i], (err, result) => {
              if (err) return console.log(err)
+             console.log('sauvegarder dans la BD')
          })
     }
 
@@ -129,11 +142,28 @@ res.redirect('/membres')
 app.get('/viderlaliste', (req, res) => {
 
     let id = req.params.id
+    console.log(id)
 
     db.collection('adresse').remove( {}, (err, resultat) => {
 
         if (err) return console.log(err)
          res.redirect('/membres')
+    })
+})
+
+
+////////////////////////////////////////////////////////////AFFICHER/RECHERCHER UN PROFIL
+app.post('/recherche', (req, res) => {
+
+    let rechercher = req.body.recherche;
+
+    db.collection('adresse').find({$or: [{"prenom": rechercher}, {"nom" : rechercher}, {"telephone" : rechercher}, {"courriel" : rechercher}]}).toArray(function(err, resultat){
+
+
+        if (err) return console.log(err)
+        res.render('profil.ejs', {adresses: resultat})
+
+
     })
 })
 
