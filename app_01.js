@@ -86,30 +86,23 @@ app.post('/trier/:cle/:ordre', (req, res) => {
  })
 
 ////////////////////////////////////////////////////////////MODIFIER
-app.get('/modifier', (req, res) => {
+app.post('/modifier', (req, res) => {
+    let adresse = {
+        _id: ObjectID(req.body.id),
+        prenom: req.body.prenom,
+        nom: req.body.nom,
+        telephone: req.body.telephone,
+        courriel: req.body.courriel
+    };
 
-    //console.log(req.body['_id'])
-
-        let oModif = {
-            "_id": ObjectID(req.body['_id']), 
-            prenom: req.body.prenom,
-            nom: req.body.nom,
-            telephone:req.body.telephone,
-            courriel:req.body.courriel
+    db.collection('adresse').save(adresse, (err, enreg) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.redirect('http://localhost:8081/membres');
         }
-
-        //let util = require("util");
-        //console.log('util = ' + util.inspect(oModif));
-    
-    db.collection('adresse').save(oModif, (err, result) => {
-
-        if (err) return console.log(err)
-        //console.log('Sauvegarder dans la BD')
-        res.redirect('http://localhost:8081/membres')
-
-    })
-
- })
+    });
+});
 
 ////////////////////////////////////////////////////////////PEUPLER
 app.get('/peupler', function (req, res) {
