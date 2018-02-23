@@ -4,7 +4,18 @@
 <body>
 <%- include('partials/header.ejs') %>
 	<h1>Carnet d'adresse</h1>
-	<h2>Membres</h2>
+
+	<h2>Formulaire d'ajout de membre</h2>
+
+	 <form class="formulaire" action="/ajouter" method="GET">
+		 <label>Prénom: <input type="text" class="bonFormulaire" name="prenom"><br></label>
+ 		 <label>Nom: <input type="text" class="bonFormulaire" name= "nom"><br></label>
+ 		 <label>Telephone:<input type="text" class="bonFormulaire" name= "telephone"><br></label>
+ 		<label>Courriel: <input type="text" class="bonFormulaire" name="courriel"><br></label>
+ 		<input type="submit" class="ajout" class="bonFormulaire" value="Ajouter un membre">
+ 	  </form>
+
+	<h2>Liste de membres</h2>
 	<form action= "/recherche" class="formRecherche" name="recherche" method="POST">
 		<input type='text' id="barreRecherche" name="recherche" placeholder="Rechercher un membre...">
 		<input type="submit" class="chercher" value="Chercher">
@@ -60,18 +71,8 @@
  			</tr>
  			<% }) %>
  		</table>
-	  <h2>Formulaire</h2>
 
-	 <form class="formulaire" action="/ajouter" method="GET">
-		 <label>Prénom: <input type="text" class="bonFormulaire" name="prenom"><br></label>
- 		 <label>Nom: <input type="text" class="bonFormulaire" name= "nom"><br></label>
- 		 <label>Telephone:<input type="text" class="bonFormulaire" name= "telephone"><br></label>
- 		<label>Courriel: <input type="text" class="bonFormulaire" name="courriel"><br></label>
- 		<input type="submit" class="ajout" class="bonFormulaire" value="Ajouter un membre">
- 	  </form>
- 	  	<a class="retour" href="http://localhost:8081">Retour</a>
-
-
+ 		<h2>Formulaire de modification de membre</h2>
  	   <form id="mon_formulaire" class="formulaire" action="/modifier" method="POST">
  	   	 <label>ID: <input type="text" name="_id"><br></label>
 		 <label>Prénom: <input type="text" name="prenom"><br></label>
@@ -80,6 +81,7 @@
  		<label>Courriel: <input type="text" name="courriel"><br></label>
  		<input type="submit" value="Ajouter un membre">
  	  </form>
+ 	  
  	<script type="text/javascript">
  	  	(function(){
 			 let elmSauver = document.querySelectorAll('.sauver')
