@@ -3,7 +3,6 @@
 <%- include('partials/head.ejs') %>
 <body>
 <%- include('partials/header.ejs') %>
-	<h1>Carnet d'adresse</h1>
 
 	<h2>Formulaire d'ajout de membre</h2>
 
@@ -22,39 +21,29 @@
  	</form>
  		<table class="tableau">
 
- 			<% if(typeof test == 'undefined') {
-
- 				test = 'asc'
-
+ 			<% if(typeof asc == 'undefined') {
+ 				asc = 'asc'
  				}
-
  			%>
-
 
  			<% let noLigne = 0 %>
  			<% for(element of adresses) {%>
 			 
 				 <% if (noLigne==0) {%>
-				
 				 	<tr>
-
 	 					<% noLigne++
-	 			
-	 							for (p in element){ %>
-
-	 									<th><a href=/trier/<%=p %>/<%= test %> ><%= p %></a></th>
-	 							<% } %>
+	 						for (p in element){ %>
+	 								<th><a href=/trier/<%=p %>/<%= asc %> ><%= p %></a></th>
+	 						<% } %>
 	 					<td>
 	 						<a class="ajouter" href='/ajouter'>Ajouter</a>
 	 					</td>
 	 				</tr>
-
 	 			<% } %>
 
  			<% } %>
 
  			<% adresses.forEach(elm => {%>
-
 
  			<tr>
  				<td><%= elm._id %></td>
@@ -107,7 +96,6 @@
 					elmInput[4].value = courriel
 
 					elmForm.submit()
-
 			 	 })
 			 } 
 	})()

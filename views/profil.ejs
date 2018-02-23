@@ -2,48 +2,39 @@
 <html lang="fr">
 <%- include('partials/head.ejs') %>
 <body> 
-<%- include('partials/header.ejs') %>
-<h1>Profil</h1>
+	<%- include('partials/header.ejs') %>
+	<h1>Profil</h1>
 
+	<table class="tableau">
 
-<table class="tableau">
-
- 			<% let noLigne = 0 %>
- 			<% for(element of adresses) {%>
-			 
-				 <% if (noLigne==0) {%>
-				
-				 	<tr>
-	 					<% noLigne++ 
-
-	 						for (p in element){ %>
-
-	 									<th><%= p %></th>
-	 							<% } %>
-
-	 					%>
-	 				</tr>
-
+	 			<% let noLigne = 0 %>
+	 			<% for(element of adresses) {%>
+					 <% if (noLigne==0) {%>
+					 	<tr>
+		 					<% noLigne++ 
+		 						for (p in element){ %>
+		 								<th><%= p %></th>
+		 						<% } %>
+		 					%>
+		 				</tr>
+		 			<% } %>
 	 			<% } %>
 
- 			<% } %>
+	 			<% adresses.forEach(elm => {%>
 
- 			<% adresses.forEach(elm => {%>
+	 			<tr>
+	 				<td><%= elm._id %></td>
+	 				<td><%= elm.prenom %></td>
+	 				<td><%= elm.nom %></td>
+	 				<td><%= elm.telephone %></td>
+	 				<td><%= elm.courriel %></td>
+	 			</tr>
+	 			<% }) %>
+	 </table>
 
+	 <a class="retour" href="/membres">Retour</a>
 
- 			<tr>
- 				<td><%= elm._id %></td>
- 				<td><%= elm.prenom %></td>
- 				<td><%= elm.nom %></td>
- 				<td><%= elm.telephone %></td>
- 				<td><%= elm.courriel %></td>
- 			</tr>
- 			<% }) %>
- </table>
-
- <a class="retour" href="/membres">Retour</a>
-
-<%- include('partials/footer.ejs') %>
+	<%- include('partials/footer.ejs') %>
 
 </body>
 </html>

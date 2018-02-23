@@ -89,27 +89,22 @@ app.get('/trier/:cle/:ordre', (req, res) => {
 app.post('/modifier', (req, res) => {
 
     console.log(req.body['_id'])
-    
-        console.log('sauvegarde') 
 
         let oModif = {
-
             "_id": ObjectID(req.body['_id']), 
             prenom: req.body.prenom,
             nom: req.body.nom,
             telephone:req.body.telephone,
             courriel:req.body.courriel
-
         }
 
-
-        let util = require("util");
-        console.log('util = ' + util.inspect(oModif));
+        //let util = require("util");
+        //console.log('util = ' + util.inspect(oModif));
     
     db.collection('adresse').save(oModif, (err, result) => {
 
         if (err) return console.log(err)
-        console.log('sauvegarder dans la BD')
+        //console.log('Sauvegarder dans la BD')
         res.redirect('/membres')
 
     })
