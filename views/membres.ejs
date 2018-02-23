@@ -62,19 +62,18 @@
  		</table>
 
  		<h2>Formulaire de modification de membre</h2>
- 	   <form id="mon_formulaire" class="formulaire" action="/modifier" method="POST">
- 	   	 <label>ID: <input type="text" name="_id"><br></label>
-		 <label>Prénom: <input type="text" name="prenom"><br></label>
- 		 <label>Nom: <input type="text" name="nom"><br></label>
- 		 <label>Telephone:<input type="text" name="telephone"><br></label>
- 		<label>Courriel: <input type="text" name="courriel"><br></label>
- 		<input type="submit" value="Ajouter un membre">
- 	  </form>
+	 	   <form id="mon_formulaire" class="formulaire" action="/modifier" method="POST">
+	 	   	 <label>ID: <input type="text" name="_id"><br></label>
+			 <label>Prénom: <input type="text" name="prenom"><br></label>
+	 		 <label>Nom: <input type="text" name="nom"><br></label>
+	 		 <label>Telephone:<input type="text" name="telephone"><br></label>
+	 		<label>Courriel: <input type="text" name="courriel"><br></label>
+	 		<input type="submit" value="Ajouter un membre">
+	 	  </form>
  	  
  	<script type="text/javascript">
  	  	(function(){
 			 let elmSauver = document.querySelectorAll('.sauver')
-			 console.log('elmSauver = ' + elmSauver.length)
 			 for (elm of elmSauver)
 			 {
 				 elm.addEventListener('click', function(){
@@ -87,7 +86,6 @@
 					 let courriel = laLigne.children[4].innerHTML
 
 					let elmForm = document.getElementById('mon_formulaire')
-					console.log(elmForm.tagName)
 					let elmInput = elmForm.querySelectorAll('input')
 					elmInput[0].value = id
 					elmInput[2].value = nom

@@ -18,7 +18,7 @@ app.get('/membres', (req, res) => {
     let cursor = db.collection('adresse').find().toArray(function(err, resultat){
 
          if (err) return console.log(err)
-         console.log('util = ' + util.inspect(resultat));
+         //console.log('util = ' + util.inspect(resultat));
 
          //transfert du contenu vers la vue index.ejs (renders)
          //affiche le contenu de la BD
@@ -29,7 +29,7 @@ app.get('/membres', (req, res) => {
 
 app.get('/', (req, res) => {
 
-     console.log('accueil')
+     //console.log('accueil')
      res.render('accueil.ejs')
 
 })
@@ -39,13 +39,13 @@ app.get('/', (req, res) => {
 app.get('/ajouter', function (req, res) {
 
     //Preparer l'output en format JSON
-    console.log('la route /traiter_get')
+    //console.log('la route /traiter_get')
 
     db.collection('adresse').save(req.query, (err, result) => {
              
         if (err) return console.log(err)
         console.log('sauvegarder dans la BD')
-        res.redirect('/membres')
+        res.redirect('http://localhost:8081/membres')
     })
 })
 
@@ -57,12 +57,12 @@ app.get('/supprimer/:id', (req, res) => {
     db.collection('adresse').findOneAndDelete({"_id": ObjectID(req.params.id)}, (err, resultat) => {
 
         if (err) return console.log(err)
-        res.redirect('/membres')
+        res.redirect('http://localhost:8081/membres')
     })
 })
 
 ///////////////////////////////////////////////////////////TRIER
-app.get('/trier/:cle/:ordre', (req, res) => {
+app.post('/trier/:cle/:ordre', (req, res) => {
     
     let cle = req.params.cle
     let ordre = (req.params.ordre == 'asc' ? 1 : -1)
@@ -86,9 +86,9 @@ app.get('/trier/:cle/:ordre', (req, res) => {
  })
 
 ////////////////////////////////////////////////////////////MODIFIER
-app.post('/modifier', (req, res) => {
+app.get('/modifier', (req, res) => {
 
-    console.log(req.body['_id'])
+    //console.log(req.body['_id'])
 
         let oModif = {
             "_id": ObjectID(req.body['_id']), 
@@ -105,7 +105,7 @@ app.post('/modifier', (req, res) => {
 
         if (err) return console.log(err)
         //console.log('Sauvegarder dans la BD')
-        res.redirect('/membres')
+        res.redirect('http://localhost:8081/membres')
 
     })
 
@@ -115,10 +115,10 @@ app.post('/modifier', (req, res) => {
 app.get('/peupler', function (req, res) {
 
     let peuplement = peupler()
-    console.log(peuplement)
+    //console.log(peuplement)
 
     //Preparer l'output en format JSON
-    console.log('la route /traiter_get')
+    //console.log('la route /traiter_get')
 
     for(let i=0; i<peuplement.length; i++){
 
@@ -128,7 +128,7 @@ app.get('/peupler', function (req, res) {
          })
     }
 
-res.redirect('/membres')
+res.redirect('http://localhost:8081/membres')
 
 })
 
@@ -137,12 +137,12 @@ res.redirect('/membres')
 app.get('/viderlaliste', (req, res) => {
 
     let id = req.params.id
-    console.log(id)
+    //console.log(id)
 
     db.collection('adresse').remove( {}, (err, resultat) => {
 
         if (err) return console.log(err)
-         res.redirect('/membres')
+         res.redirect('http://localhost:8081/membres')
     })
 })
 
