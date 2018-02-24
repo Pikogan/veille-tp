@@ -62,7 +62,7 @@ app.get('/supprimer/:id', (req, res) => {
 })
 
 ///////////////////////////////////////////////////////////TRIER
-app.post('/trier/:cle/:ordre', (req, res) => {
+app.get('/trier/:cle/:ordre', (req, res) => {
     
     let cle = req.params.cle
     let ordre = (req.params.ordre == 'asc' ? 1 : -1)

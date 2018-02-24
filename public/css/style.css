@@ -47,6 +47,7 @@ th,
 td {
   border: 1px black solid;
   padding: 5px;
+  background-color: #2678ff;
 }
 .bodyMembres {
   display: flex;
@@ -56,6 +57,14 @@ td {
 .tableauMembres {
   margin: 0 auto;
   text-align: center;
+}
+.tableauMembres a {
+  color: black;
+  text-decoration: none;
+}
+.tableauMembres a:hover {
+  color: white;
+  text-decoration: underline;
 }
 .tableauMembreSeul {
   margin: 0 auto;
