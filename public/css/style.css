@@ -35,3 +35,10 @@ td {
   flex-direction: column;
   text-align: center;
 }
+.tableauMembres {
+  margin: 0 auto;
+  text-align: center;
+}
+.tableauMembreSeul {
+  margin: 0 auto;
+}

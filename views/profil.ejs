@@ -5,7 +5,8 @@
 	<%- include('partials/header.ejs') %>
 	<h1>Profil</h1>
 
-	<table class="tableau">
+	<section class="tableauMembres">
+		<table class="tableauMembreSeul">
 
 	 			<% let noLigne = 0 %>
 	 			<% for(element of adresses) {%>
@@ -33,6 +34,8 @@
 	 </table>
 
 	 <a class="retour" href="/membres">Retour</a>
+	</section>
+	
 
 	<%- include('partials/footer.ejs') %>
 
