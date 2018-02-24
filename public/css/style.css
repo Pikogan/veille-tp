@@ -30,3 +30,8 @@ td {
   border: 1px black solid;
   padding: 5px;
 }
+.bodyMembres {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
