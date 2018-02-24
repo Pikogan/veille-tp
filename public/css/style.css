@@ -1,4 +1,11 @@
 /* Général */
+body {
+  font-family: Tahoma, Geneva, sans-serif;
+}
+header,
+footer {
+  font-family: Georgia, serif;
+}
 h1 {
   text-align: center;
 }
