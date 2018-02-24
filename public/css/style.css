@@ -1,1 +1,32 @@
-h1{text-align:center}nav{margin:0 auto;text-align:center}.sectionTexte{text-align:center;margin:0 auto;width:75%}ul{list-style-type:none}li{display:inline}nav li a{display:inline-block}td,th{border:1px solid #000;padding:5px}footer{text-align:center}
+/* Général */
+h1 {
+  text-align: center;
+}
+nav {
+  margin: 0 auto;
+  text-align: center;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  display: inline;
+}
+nav li a {
+  display: inline-block;
+}
+footer {
+  text-align: center;
+}
+/* Page accueil */
+.sectionTexte {
+  text-align: center;
+  margin: 0 auto;
+  width: 75%;
+}
+/* Page Membres */
+th,
+td {
+  border: 1px black solid;
+  padding: 5px;
+}

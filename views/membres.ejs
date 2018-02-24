@@ -4,101 +4,110 @@
 <body>
 <%- include('partials/header.ejs') %>
 
-	<h2>Formulaire d'ajout de membre</h2>
+	<section class="bodyMembres">
+		<section class="sectionFormAjout">
+		<h2>Formulaire d'ajout de membre</h2>
 
-	 <form class="formulaire" action="/ajouter" method="GET">
-		 <label>Prénom: <input type="text" class="bonFormulaire" name="prenom"><br></label>
- 		 <label>Nom: <input type="text" class="bonFormulaire" name= "nom"><br></label>
- 		 <label>Telephone:<input type="text" class="bonFormulaire" name= "telephone"><br></label>
- 		<label>Courriel: <input type="text" class="bonFormulaire" name="courriel"><br></label>
- 		<input type="submit" class="ajout" class="bonFormulaire" value="Ajouter un membre">
- 	  </form>
+		 <form class="formulaire" action="/ajouter" method="GET">
+			<label>Prénom: <input type="text" class="bonFormulaire" name="prenom"><br></label>
+	 		<label>Nom: <input type="text" class="bonFormulaire" name= "nom"><br></label>
+	 		<label>Telephone:<input type="text" class="bonFormulaire" name= "telephone"><br></label>
+	 		<label>Courriel: <input type="text" class="bonFormulaire" name="courriel"><br></label>
+	 		<input type="submit" class="ajout" class="bonFormulaire" value="Ajouter un membre">
+	 	  </form>
+		</section>
+	
+		<section class="sectionListMembres">
+			<h2>Liste de membres</h2>
+			<form action= "/recherche" class="formRecherche" name="recherche" method="POST">
+				<input type='text' id="barreRecherche" name="recherche" placeholder="Rechercher un membre...">
+				<input type="submit" class="chercher" value="Chercher">
+		 	</form>
+	 		<table class="tableau">
 
-	<h2>Liste de membres</h2>
-	<form action= "/recherche" class="formRecherche" name="recherche" method="POST">
-		<input type='text' id="barreRecherche" name="recherche" placeholder="Rechercher un membre...">
-		<input type="submit" class="chercher" value="Chercher">
- 	</form>
- 		<table class="tableau">
+	 			<% if(typeof asc == 'undefined') {
+	 				asc = 'asc'
+	 				}
+	 			%>
 
- 			<% if(typeof asc == 'undefined') {
- 				asc = 'asc'
- 				}
- 			%>
+	 			<% let noLigne = 0 %>
+	 			<% for(element of adresses) {%>
+				 
+					 <% if (noLigne==0) {%>
+					 	<tr>
+		 					<% noLigne++
+		 						for (p in element){ %>
+		 								<th><a href=/trier/<%=p %>/<%= asc %> ><%= p %></a></th>
+		 						<% } %>
+		 					<td>
+		 						<a class="ajouter" href='/ajouter'>Ajouter</a>
+		 					</td>
+		 				</tr>
+		 			<% } %>
 
- 			<% let noLigne = 0 %>
- 			<% for(element of adresses) {%>
-			 
-				 <% if (noLigne==0) {%>
-				 	<tr>
-	 					<% noLigne++
-	 						for (p in element){ %>
-	 								<th><a href=/trier/<%=p %>/<%= asc %> ><%= p %></a></th>
-	 						<% } %>
-	 					<td>
-	 						<a class="ajouter" href='/ajouter'>Ajouter</a>
-	 					</td>
-	 				</tr>
 	 			<% } %>
 
- 			<% } %>
+	 			<% adresses.forEach(elm => {%>
 
- 			<% adresses.forEach(elm => {%>
+	 			<tr>
+	 				<td><%= elm._id %></td>
+	 				<td contenteditable="true"><%= elm.prenom %></td>
+	 				<td contenteditable="true"><%= elm.nom %></td>
+	 				<td contenteditable="true"><%= elm.telephone %></td>
+	 				<td contenteditable="true"><%= elm.courriel %></td>
+	 				<td>
+	 					<a class="sauver" href='/modifier'>Modifier</a>
+	 				</td>
+	 				<td>
+	 					<a class= "supprimer" href='/supprimer/<%= elm._id %>'>Supprimer</a>
+	 				</td>
+	 			</tr>
+	 			<% }) %>
+	 		</table>
+		</section>
+		
+		<section class="sectionFormModif">
+			<h2>Formulaire de modification de membre</h2>
+		 	   <form id="mon_formulaire" class="formulaire" action="/modifier" method="POST">
+		 	   	 <label>ID: <input type="text" name="_id"><br></label>
+				 <label>Prénom: <input type="text" name="prenom"><br></label>
+		 		 <label>Nom: <input type="text" name="nom"><br></label>
+		 		 <label>Telephone:<input type="text" name="telephone"><br></label>
+		 		<label>Courriel: <input type="text" name="courriel"><br></label>
+		 		<input type="submit" value="Modifier un membre">
+		 	  </form>
+		</section>
+	 		
+	 	<script type="text/javascript">
+	 	  	(function(){
+				 let elmSauver = document.querySelectorAll('.sauver')
+				 for (elm of elmSauver)
+				 {
+					 elm.addEventListener('click', function(){
+					
+						 let laLigne = this.parentNode.parentNode
+						 let id = laLigne.children[0].innerHTML
+						 let nom = laLigne.children[2].innerHTML
+						 let prenom = laLigne.children[1].innerHTML
+						 let telephone = laLigne.children[3].innerHTML
+						 let courriel = laLigne.children[4].innerHTML
 
- 			<tr>
- 				<td><%= elm._id %></td>
- 				<td contenteditable="true"><%= elm.prenom %></td>
- 				<td contenteditable="true"><%= elm.nom %></td>
- 				<td contenteditable="true"><%= elm.telephone %></td>
- 				<td contenteditable="true"><%= elm.courriel %></td>
- 				<td>
- 					<a class="sauver" href='/modifier'>Modifier</a>
- 				</td>
- 				<td>
- 					<a class= "supprimer" href='/supprimer/<%= elm._id %>'>Supprimer</a>
- 				</td>
- 			</tr>
- 			<% }) %>
- 		</table>
+						let elmForm = document.getElementById('mon_formulaire')
+						let elmInput = elmForm.querySelectorAll('input')
+						elmInput[0].value = id
+						elmInput[2].value = nom
+						elmInput[1].value = prenom
+						elmInput[3].value = telephone
+						elmInput[4].value = courriel
 
- 		<h2>Formulaire de modification de membre</h2>
-	 	   <form id="mon_formulaire" class="formulaire" action="/modifier" method="POST">
-	 	   	 <label>ID: <input type="text" name="_id"><br></label>
-			 <label>Prénom: <input type="text" name="prenom"><br></label>
-	 		 <label>Nom: <input type="text" name="nom"><br></label>
-	 		 <label>Telephone:<input type="text" name="telephone"><br></label>
-	 		<label>Courriel: <input type="text" name="courriel"><br></label>
-	 		<input type="submit" value="Modifier un membre">
-	 	  </form>
- 	  
- 	<script type="text/javascript">
- 	  	(function(){
-			 let elmSauver = document.querySelectorAll('.sauver')
-			 for (elm of elmSauver)
-			 {
-				 elm.addEventListener('click', function(){
-				
-					 let laLigne = this.parentNode.parentNode
-					 let id = laLigne.children[0].innerHTML
-					 let nom = laLigne.children[2].innerHTML
-					 let prenom = laLigne.children[1].innerHTML
-					 let telephone = laLigne.children[3].innerHTML
-					 let courriel = laLigne.children[4].innerHTML
-
-					let elmForm = document.getElementById('mon_formulaire')
-					let elmInput = elmForm.querySelectorAll('input')
-					elmInput[0].value = id
-					elmInput[2].value = nom
-					elmInput[1].value = prenom
-					elmInput[3].value = telephone
-					elmInput[4].value = courriel
-
-					elmForm.submit()
-			 	 })
-			 } 
-	})()
-</script>
-<%- include('partials/footer.ejs') %>
+						elmForm.submit()
+				 	 })
+				 } 
+		})()
+		</script>
+		<%- include('partials/footer.ejs') %>
+	</section>
+	
 
  </body>
 </html>
