@@ -18,7 +18,6 @@ app.get('/membres', (req, res) => {
     let cursor = db.collection('adresse').find().toArray(function(err, resultat){
 
          if (err) return console.log(err)
-         //console.log('util = ' + util.inspect(resultat));
 
          //transfert du contenu vers la vue index.ejs (renders)
          //affiche le contenu de la BD
